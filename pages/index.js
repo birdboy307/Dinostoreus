@@ -3,8 +3,13 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <div className='h-screen bg-gray-50'>
+    <>
+      <Head>
+        <title>Dinostoreus | Home</title>
+      </Head>
+      <div className='h-screen bg-gray-50'>
 
-    </div>
+      </div>
+    </>
   )
 }
