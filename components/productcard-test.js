@@ -1,16 +1,22 @@
 import { toast } from 'react-toastify';
-import { useCart } from "react-use-cart";
 
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function ProductCard(props) {
-    const { addItem } = useCart();
-    
     const product = {id: props.id, name: props.title, price: props.price, description: props.description, image: props.image};
 
-    const notify = () => {
-        addItem(product)
-        toast.success("Added to Cart");
+    const Toast = () => {
+        toast.success(`Added ${product.name} to cart`)
+    }
+
+    const buyNow = async () => {
+        const response = await fetch('/api/checkout', {
+            method: 'POST',
+            body: JSON.stringify({ product }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     }
     
     return (
@@ -27,7 +33,7 @@ export default function ProductCard(props) {
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-3xl font-bold text-gray-900">{props.price}</span>
-                    <button onClick={notify} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ease-in-out duration-300">Add to cart</button>
+                    <button onClick={buyNow} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ease-in-out duration-300">Add to cart</button>
                 </div>
             </div>
         </div>

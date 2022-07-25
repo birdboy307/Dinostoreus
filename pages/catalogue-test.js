@@ -1,7 +1,6 @@
 import Head from "next/head"
-import { Client, Environment } from "square"
 
-import ProductCard from "../components/productcard"
+import ProductCard from "../components/productcard-test"
 
 const products = [
     {
@@ -60,23 +59,3 @@ export default function catalogue() {
     </>
   )
 }
-
-//export a async function
-//create a new client with the environment being sandbox and the access token from enviroment variables
-//await the client.catalogue.products.list(undefined, 'ITEM') as response
-//console.log the response
-
-export async function getServerSideProps() {
-    const client = new Client({
-        environment: Environment.Sandbox,
-        accessToken: process.env.SQUARE_ACCESS_TOKEN,
-    })
-        const response = await client.catalogApi.listCatalog(undefined, 'ITEM');
-      
-        console.log(response.result.objects);
-    
-    return {
-        props: {produc: "he"},
-    }
-}
-
