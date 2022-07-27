@@ -39,7 +39,7 @@ export default async function handler(req, res) {
           idempotencyKey: uuid
         },
         merchantSupportEmail: 'example@example.com',
-        redirectUrl: 'http://localhost:3000'
+        redirectUrl: 'https://dinostoreus.verlcel.app'
       });
       res.redirect(303, response.result.checkout.checkoutPageUrl);
       console.log(response.result.checkout.checkoutPageUrl);
