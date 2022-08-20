@@ -15,7 +15,7 @@ export default function Navbar() {
                 <Link href="/">
                     <a className="ease-in-out duration-150 hover:rotate-6 hover:scale-110">Home</a>
                 </Link>
-                <Link href="/catalogue">
+                <Link href="/catalog">
                     <a className="ease-in-out duration-150 hover:rotate-6 hover:scale-110">Catalogue</a>
                 </Link>
                 <Link href="/about">

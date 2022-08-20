@@ -1,42 +1,41 @@
 import Head from "next/head"
-import { Client, Environment } from "square"
 
-import ProductCard from "../components/productcard"
+import ProductCard from "../components/productcardtest"
 
 const products = [
     {
         id: "1",
         name: "Product 1",
-        price: "$1.00",
+        price: "100",
         description: "This is a product",
         image: "https://images.unsplash.com/photo-1558637845-c8b7ead71a3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8MTYlM0E5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
     },
     {
         id: "2",
         name: "Product 2",
-        price: "$2.00",
+        price: "200",
         description: "This is a product",
         image: "https://images.unsplash.com/photo-1603486002664-a7319421e133?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8MTYlM0E5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
     },
     {
         id: "3",
         name: "Product 3",
-        price: "$3.00",
+        price: "300",
         description: "This is a product",
         image: "https://images.unsplash.com/photo-1626593261859-4fe4865d8cb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8MTYlM0E5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
     }
 ]
 
-export default function catalogue() {
-  return (
+export default function cataloguetest() {
+    return (
     <>
         <Head>
-            <title>Dinostoreus | Catalogue</title>
+            <title>Dinostoreus | Catalog</title>
         </Head>
         <div className="h-fit w-full bg-gray-50">
             <section className="w-1/3 flex justify-center h-1/6">
                 <div>
-                    <h2 className="text-4xl font-semibold my-24">Catalogue</h2> 
+                    <h2 className="text-4xl font-semibold my-24">Catalog</h2> 
                 </div>
             </section>
             <section className="flex justify-center translate-y-12 pb-24">
@@ -46,7 +45,7 @@ export default function catalogue() {
                             <li key={product.id}>
                                 <ProductCard
                                 id={product.id}
-                                title={product.name}
+                                name={product.name}
                                 description={product.description}
                                 image={product.image}
                                 price={product.price}
@@ -60,23 +59,3 @@ export default function catalogue() {
     </>
   )
 }
-
-//export a async function
-//create a new client with the environment being sandbox and the access token from enviroment variables
-//await the client.catalogue.products.list(undefined, 'ITEM') as response
-//console.log the response
-
-export async function getServerSideProps() {
-    const client = new Client({
-        environment: Environment.Sandbox,
-        accessToken: process.env.SQUARE_ACCESS_TOKEN,
-    })
-        const response = await client.catalogApi.listCatalog(undefined, 'ITEM');
-      
-        console.log(response.result.objects);
-    
-    return {
-        props: {produc: "he"},
-    }
-}
-

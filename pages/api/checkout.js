@@ -4,7 +4,8 @@ import crypto from "crypto";
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     
-    const order = req.body.product
+    const order = req.body.info
+    const price = BigInt(order.price)
 
     const client = new Client({
       environment: Environment.Sandbox,
@@ -22,11 +23,11 @@ export default async function handler(req, res) {
             locationId: 'LGZSW7D2EASAY',
             lineItems: [
               {
-                name: 'Chocolate Milk',
-                quantity: '2',
+                name: order.name,
+                quantity: '1',
                 itemType: 'ITEM',
                 basePriceMoney: {
-                  amount: 2000,
+                  amount: price,
                   currency: 'AUD'
                 }
               }
@@ -38,11 +39,11 @@ export default async function handler(req, res) {
           },
           idempotencyKey: uuid
         },
+        askForShippingAddress: true,
         merchantSupportEmail: 'example@example.com',
-        redirectUrl: 'http://localhost:3000'
+        redirectUrl: 'https://dinostoreus.vercel.app'
       });
-      res.redirect(303, response.result.checkout.checkoutPageUrl);
-      console.log(response.result.checkout.checkoutPageUrl);
+      res.json({url: response.result.checkout.checkoutPageUrl});
     
     } catch (error) {
       console.log(error);
